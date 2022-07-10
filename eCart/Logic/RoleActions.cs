@@ -25,13 +25,13 @@ namespace eCart.Logic
             var userMgr = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
             var appUser = new ApplicationUser
             {
-                UserName = "Nenad.N.Rakas@aicloudptyltd.com",
-                Email = "Nenad.N.Rakas@aicloudptyltd.com"
+                UserName = "NenadRakas@outlook.com",
+                Email = "NenadRakas@outlook.com"
             };
             //IdUserResult = userMgr.Create(appUser, ConfigurationManager.AppSettings["AppUserPasswordKey"]);
-            if (!userMgr.IsInRole(userMgr.FindByEmail("Nenad.N.Rakas@aicloudptyltd.com").Id, "canEdit"))
+            if (!userMgr.IsInRole(userMgr.FindByEmail("NenadRakas@outlook.com").Id, "canEdit"))
             {
-                IdUserResult = userMgr.AddToRole(userMgr.FindByEmail("Nenad.N.Rakas@aicloudptyltd.com").Id, "canEdit");
+                IdUserResult = userMgr.AddToRole(userMgr.FindByEmail("NenadRakas@outlook.com").Id, "canEdit");
             }
         }
     }
