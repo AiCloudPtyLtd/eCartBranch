@@ -36,13 +36,6 @@
                 <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" Text="* Must be a valid price without $." ControlToValidate="AddProductPrice" SetFocusOnError="True" Display="Dynamic" ValidationExpression="^[0-9]*(\.)?[0-9]?[0-9]?$"></asp:RegularExpressionValidator>
             </td>
         </tr>
-        <tr>
-            <td><asp:Label ID="LabelAddImageFile" runat="server">Image File:</asp:Label></td>
-            <td>
-                <asp:FileUpload ID="ProductImage" runat="server" />
-                <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" Text="* Image path required." ControlToValidate="ProductImage" SetFocusOnError="true" Display="Dynamic"></asp:RequiredFieldValidator>
-            </td>
-        </tr>
     </table>
     <p></p>
     <p></p>

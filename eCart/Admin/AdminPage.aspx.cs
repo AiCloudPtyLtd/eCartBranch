@@ -25,47 +25,18 @@ namespace eCart.Admin
         }
         protected void AddProductButton_Click(object sender, EventArgs e)
         {
-            Boolean fileOK = false;
-            String path = Server.MapPath("~/Images/");
-            if (ProductImage.HasFile)
+            AddProducts products = new AddProducts();
+            string categoryImage = "AiDistance.png";           
+            bool addSuccess = products.AddProduct(AddProductName.Text, AddProductDescription.Text,
+                AddProductPrice.Text, DropDownAddCategory.SelectedValue, categoryImage);
+            if (addSuccess)
             {
-                String fileExtension = System.IO.Path.GetExtension(ProductImage.FileName).ToLower();
-                String[] allowedExtensions = { ".gif", ".png", ".jpeg", ".jpg" };
-                for (int i = 0; i < allowedExtensions.Length; i++)
-                {
-                    if (fileExtension == allowedExtensions[i])
-                    {
-                        fileOK = true;
-                    }
-                }
-            }
-            if (fileOK)
-            {
-                try
-                {
-                    //ProductImage.PostedFile.SaveAs(path + ProductImage.FileName);
-                    ProductImage.PostedFile.SaveAs(path + "Thumbs/" + ProductImage.FileName);
-                }
-                catch (Exception ex)
-                {
-                    LabelAddStatus.Text = ex.Message;
-                }
-                AddProducts products = new AddProducts();
-                bool addSuccess = products.AddProduct(AddProductName.Text, AddProductDescription.Text,
-                    AddProductPrice.Text, DropDownAddCategory.SelectedValue, ProductImage.FileName);
-                if (addSuccess)
-                {
-                    string pageUrl = Request.Url.AbsoluteUri.Substring(0, Request.Url.AbsoluteUri.Count() - Request.Url.Query.Count());
-                    Response.Redirect(pageUrl + "?ProductAction=add");
-                }
-                else
-                {
-                    LabelAddStatus.Text = "Unable to add new product to database.";
-                }
+                string pageUrl = Request.Url.AbsoluteUri.Substring(0, Request.Url.AbsoluteUri.Count() - Request.Url.Query.Count());
+                Response.Redirect(pageUrl + "?ProductAction=add");
             }
             else
             {
-                LabelAddStatus.Text = "Unable to accept file type.";
+                LabelAddStatus.Text = "Unable to add new product to database.";
             }
         }
         public IQueryable GetCategories()

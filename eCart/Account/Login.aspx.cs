@@ -31,7 +31,7 @@ namespace eCart.Account
                 switch (result)
                 {
                     case SignInStatus.Success:
-                        //IdentityHelper.RedirectToReturnUrl(Request.QueryString["ReturnUrl"], Response);
+                        IdentityHelper.RedirectToReturnUrl(Request.QueryString["ReturnUrl"], Response);
                         eCart.Logic.ShoppingCartActions usersShoppingCart = new eCart.Logic.ShoppingCartActions();
                         String cartId = usersShoppingCart.GetCartId();
                         usersShoppingCart.MigrateCart(cartId, Email.Text);
@@ -40,9 +40,8 @@ namespace eCart.Account
                         Response.Redirect("/Account/Lockout");
                         break;
                     case SignInStatus.RequiresVerification:
-                        Response.Redirect(String.Format("/Account/TwoFactorAuthenticationSignIn?ReturnUrl={0}&RememberMe={1}", 
-                                                        Request.QueryString["ReturnUrl"],
-                                                        RememberMe.Checked), true);
+                        Response.Redirect(String.Format("/Account/TwoFactorAuthenticationSignIn?ReturnUrl={0}&RememberMe={1}",
+                                                        Request.QueryString["ReturnUrl"], RememberMe.Checked), true);
                         break;
                     case SignInStatus.Failure:
                     default:
