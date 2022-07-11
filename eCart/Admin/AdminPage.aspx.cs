@@ -26,7 +26,30 @@ namespace eCart.Admin
         protected void AddProductButton_Click(object sender, EventArgs e)
         {
             AddProducts products = new AddProducts();
-            string categoryImage = "AiDistance.png";           
+            string categoryImage = "AiDistance.png";
+            if (DropDownAddCategory.SelectedIndex < 0) { categoryImage = "AiCloseup.png"; }
+            switch (DropDownAddCategory.SelectedIndex)
+            {
+                case 0:
+                    categoryImage = "Access.png";
+                    break;
+                case 1:
+                    categoryImage = "Privacy.png";
+                    break;
+                case 2:
+                    categoryImage = "Index.png";
+                    break;
+                case 3:
+                    categoryImage = "Security.png";
+                    break;
+                case 4:
+                    categoryImage = "Telecoms.png";
+                    break;
+                default:
+                    categoryImage = "AiCloseup.png";
+                    break;
+            }
+            if (DropDownAddCategory.SelectedIndex > 4) { categoryImage = "AiDistance.png"; }
             bool addSuccess = products.AddProduct(AddProductName.Text, AddProductDescription.Text,
                 AddProductPrice.Text, DropDownAddCategory.SelectedValue, categoryImage);
             if (addSuccess)
